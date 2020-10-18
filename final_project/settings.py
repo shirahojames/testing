@@ -34,12 +34,16 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'parents',
+    'doctor',
+    'administrator',
+    'home',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +132,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'assests')
 
 
-
+LOGIN_REDIRECT_URL='/afterlogin'
 
 LOGIN_URL  = '/login/'
