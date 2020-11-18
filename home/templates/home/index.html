@@ -61,7 +61,7 @@
       <div class="card">
         <img src="{% static "images/admin.png" %}" alt="John" style="width:100%">
         <p class="title">ADMIN</p>
-        <p><button><a href="/adminclick">View</a></button></p>
+        <p><button><a href="{% url 'admin:index' %}">View</a></button></p>
       </div>
 
     </div>
@@ -78,7 +78,7 @@
       <div class="card">
         <img src="{% static "images/parent.jpg" %}" alt="John" style="width:100%">
         <p class="title">PARENT</p>
-        <p><button><a href="/parentclick">View</a></button></p>
+        <p><button><a href="{% url 'parentclick' %}">View</a></button></p>
       </div>
     </div>
 

@@ -1,16 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import forms,models
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import Group
+
 
 # Create your views here.
 
 def home_view(request):
-    #if request.user.is_authenticated:
-        #return HttpResponseRedirect('afterlogin')
-    return render(request,'parents/index.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('afterlogin')
+    return render(request,'home/index.html')
 
 def adminclick_view(request):
     if request.user.is_authenticated:
@@ -19,8 +20,8 @@ def adminclick_view(request):
 
 
 def parentclick_view(request):
-    #if request.user.is_authenticated:
-        #return HttpResponseRedirect('afterlogin')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('afterlogin')
     return render(request,'parents/parentclick.html')
 
 def parent_signup_view(request):
@@ -63,8 +64,62 @@ def afterlogin_view(request):
         else:
             return render(request,'doctor/doctor_wait_for_approval.html')
     elif is_parent(request.user):
-        accountapproval=models.Parent.objects.all().filter(user_id=request.user.id,status=True)
-        if accountapproval:
+        #accountapproval=models.Parent.objects.all().filter(user_id=request.user.id,status=True)
+        #if accountapproval:
             return redirect('parent-dashboard')
-        else:
-            return render(request,'parents/parent_wait_for_approval.html')
+        #else:
+            #return render(request,'parents/parent_wait_for_approval.html')
+
+@login_required(login_url='parentlogin')
+@user_passes_test(is_parent)
+def parent_dashboard_view(request):
+    parent=models.Parent.objects.get(user_id=request.user.id)
+    #doctor=models.Doctor.objects.get(user_id=patient.assignedDoctorId)
+    userForm=forms. AddChildForm()
+    parentForm=forms. AddChildForm()
+    mydict={'AddChildForm':userForm,'parentForm':parentForm}
+    #mydict={
+    #'parent':parent,
+    #'doctorName':doctor.get_name,
+    #'doctorMobile':doctor.mobile,
+    #'doctorAddress':doctor.address,
+    #'symptoms':parent.symptoms,
+    #'doctorDepartment':doctor.department,
+    #'admitDate':parent.admitDate,
+    #}
+    return render(request,'parents/parent_dashboard.html',context=mydict)
+
+
+@login_required(login_url='parentlogin')
+@user_passes_test(is_parent)
+def addchild(request):
+    if is_parent(request.user):
+        #parent=models.Parent.objects.get(user_id=request.user.id)
+        userForm=forms. AddChildForm()
+        #parentForm=forms.ParentForm()
+        #parentForm=forms. AddChildForm()
+        mydict={'AddChildForm':userForm}
+        #parent=Parent.objects.get(pk=parent.id)
+
+        if request.method=='POST':
+            childForm=forms.AddChildForm(request.POST)
+            #parentForm=forms.AddChildForm(request.POST,request.FILES)
+            if childForm.is_valid():
+                #text=userForm.cleaned_data()
+                newest=childForm.save(commit=False)
+                newest.parent=request.user
+                newnum= 2
+                #childid="C"."I".rand(10, 20).date('s').newnum.chr(rand(65, 90))
+                newest.save()
+
+    return render(request, 'parents/parent_dashboard_cards.html',context=mydict)
+
+@login_required(login_url='parentlogin')
+@user_passes_test(is_parent)
+def view_child(request):
+    #user_id=request.user.id
+    children=models.Child.objects.all().filter(parent_id=request.user.id)
+    context={
+    "children":children
+    }
+    return render(request, 'parents/parent_view_child.html', context)

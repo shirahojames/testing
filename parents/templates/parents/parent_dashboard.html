@@ -1,13 +1,17 @@
-{% extends 'hospital/patient_base.html' %}
+{% extends 'parents/parent_base.html' %}
 {% load static %}
 {% block content %}
-{%include 'hospital/patient_dashboard_cards.html'%}
+
+<div style="text-align:center;">
+<a class="btn btn-link" href="{% url 'addchild' %}" style="text-align:center;">ADD CHILD</a></div>
+<div style="text-align:center;">
+<a class="btn btn-link" href="{% url 'view_child' %}" style="text-align:center;">VIEW PROGRESS</a></div>
+<div style="text-align:center;">
+<a class="btn btn-link" href="{% url 'addchild' %}" style="text-align:center;">EDIT CHILD</a></div>
 <br><br><br><br>
 
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
+
+
+
 
 {% endblock content %}

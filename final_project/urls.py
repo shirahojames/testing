@@ -20,14 +20,14 @@ from django.contrib.auth.views import LoginView,LogoutView
 #from . import parents
 
 urlpatterns = [
-    path('', include('parents.urls')),
+    path('', include('home.urls')),
+    path('parent/', include('parents.urls')),
     path('admin/', admin.site.urls),
     path('adminclick', views.adminclick_view),
+    path('logout', LogoutView.as_view(template_name='home/index.html'),name='logout'),
 
 
-    path('parentsignup', views.parent_signup_view),
-    path('parentlogin', LoginView.as_view(template_name='parents/parentlogin.html')),
-    path('parentclick', views.parentclick_view, name="parentclick"),
+
 
 
 

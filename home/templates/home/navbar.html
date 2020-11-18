@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!---  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -38,9 +38,9 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav">
 
-          <a href="/adminclick" class="nav-item nav-link">Admin</a>
+          <a href="{% url 'admin:index' %}" class="nav-item nav-link">Admin</a>
           <a href="/doctorclick" class="nav-item nav-link">Doctor</a>
-          <a href="/parentclick" class="nav-item nav-link">Parent</a>
+          <a href="{% url 'parentclick' %}" class="nav-item nav-link">Parent</a>
 
 
         </div>
@@ -48,6 +48,7 @@
         <div class="navbar-nav">
           <a href="/aboutus" class="nav-item nav-link">About Us</a>
           <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+
         </div>
 
       </div>

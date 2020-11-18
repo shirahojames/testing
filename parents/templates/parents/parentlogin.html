@@ -52,7 +52,7 @@
 </head>
 
 <body>
-{% include "parents/navbar.html" %}
+{% include "home/navbar.html" %}
   <br>
   <br>
   <br><br>
@@ -84,7 +84,7 @@
             </div>
           </div>
           <button type="submit" class="btnSubmit">Login</button>
-          <div class="text-center">Do not have account? <a href="parentsignup">Signup here</a></div>
+          <div class="text-center">Do not have account? <a href="{% url 'parentsignup' %}">Signup here</a></div>
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@
 
 
 
-{% include "parents/footer.html" %}
+{% include "home/footer.html" %}
 </body>
 
 </html>

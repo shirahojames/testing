@@ -52,7 +52,7 @@
 
 
 <body>
-  {% include "parents/navbar.html" %}
+  {% include "home/navbar.html" %}
   <br>
   <br>
   <br>
@@ -61,7 +61,7 @@
 
 
 
-  <!--- signup page for patient by hursh_turg  ---------->
+  <!--- signup page for parent by hursh_turg  ---------->
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container register-form">
@@ -82,9 +82,9 @@
               <div class="form-group">
                 {% render_field parentForm.address class="form-control" placeholder="Address" %}
               </div>
-              <div class="form-group">
+              <!---<div class="form-group">
                 {% render_field parentForm.symptoms class="form-control" placeholder="Symptoms" %}
-              </div>
+              </div>--->
               <div class="form-group">
                 {% render_field parentForm.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
               </div>
@@ -106,14 +106,14 @@
             </div>
           </div>
           <button type="submit" class="btnSubmit">Register</button>
-          <div class="text-center">Already have an account? <a href="parentlogin">Login here</a></div>
+          <div class="text-center">Already have an account? <a href="{% url 'parentlogin' %}">Login here</a></div>
         </div>
       </div>
     </div>
 
   </form>
 
-  {% include "parents/footer.html" %}
+  {% include "home/footer.html" %}
 </body>
 
 
